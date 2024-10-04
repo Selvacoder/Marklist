@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Marks Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        input {
+            margin: 5px 0;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <h1>Student Marks Management</h1>
+
+    <h2>Add Student Marks</h2>
+    <form action="/add" method="POST">
+        <input type="text" name="name" placeholder="Enter Name" required>
+        <input type="number" name="rollNo" placeholder="Enter Roll No" required>
+        <input type="number" name="sub1" placeholder="Marks for Subject 1" required>
+        <input type="number" name="sub2" placeholder="Marks for Subject 2" required>
+        <input type="number" name="sub3" placeholder="Marks for Subject 3" required>
+        <input type="number" name="sub4" placeholder="Marks for Subject 4" required>
+        <input type="number" name="sub5" placeholder="Marks for Subject 5" required>
+        <button type="submit">Add Student</button>
+    </form>
+
+    <h2>Update Marks</h2>
+    <form action="/update" method="POST">
+        <input type="number" name="rollNo" placeholder="Enter Roll No to Update" required>
+        <input type="number" name="subject" placeholder="Subject (1-5)" required>
+        <input type="number" name="marks" placeholder="Enter New Marks" required>
+        <button type="submit">Update Marks</button>
+    </form>
+
+    <h2>Delete Student</h2>
+    <form action="/delete" method="POST">
+        <input type="number" name="rollNo" placeholder="Enter Roll No to Delete" required>
+        <button type="submit">Delete Student</button>
+    </form>
+
+    <h2>Display All Students</h2>
+    <button onclick="fetchStudents()">Fetch Students</button>
+    <pre id="studentData"></pre>
+
+    <script>
+        async function fetchStudents() {
+            const response = await fetch('/display');
+            const data = await response.json();
+            document.getElementById('studentData').textContent = JSON.stringify(data, null, 2);
+        }
+    </script>
+</body>
+</html>
